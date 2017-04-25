@@ -2,7 +2,7 @@
     <div class="row">
         <div class="wrap" style="width: 300px;">
             <p style="float: left;display: block;margin-right: 20px">当前空气净化器状态</p>
-            <input type="checkbox" id="checkbox_c2" class="chk_3" ng-click="$ctrl.currentState.changeState()" ng-model="$ctrl.switchState"/><label for="checkbox_c2"></label>
+            <input type="checkbox" id="checkbox_c2" class="chk_3" ng-model="$ctrl.switchState" ng-click="$ctrl.currentState.changeState($ctrl.switchState)"/><label for="checkbox_c2"></label>
         </div>
 
         <div class="col-sm-10" style="margin-top: 50px">

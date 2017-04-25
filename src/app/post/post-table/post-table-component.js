@@ -7,14 +7,14 @@ define([
 ], function(workspaceModule, PostTableTemplate) {
     workspaceModule.component('postTable', {
         template: PostTableTemplate,
-        controller: function($scope) {
+        controller: function() {
             var ctrl = this;
-            ctrl.switchState = false;
+            ctrl.switchState = true;
             //开关
             ctrl.currentState = {
-                changeState: function () {
-                    ctrl.switchState = !ctrl.switchState;
-                    console.log(ctrl.switchState);
+                changeState: function (data) {
+                    data = !data;
+                    console.log(data);
                 }
             };
 
