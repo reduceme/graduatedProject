@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-sm-3 col-sm-offset-4">
+        <div class="login-form-container">
+            <h3 class="center-block sys-title">实时空气质量监测系统后台管理系统</h3>
+            <form name="loginForm" ng-submit="$ctrl.doLogin()" novalidate class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">邮箱</label>
+                    <div class="col-sm-10">
+                        <input type="email" name="email" class="form-control" placeholder="请输入邮箱" ng-model="$ctrl.user.email" required>
+                        <div ng-show="loginForm.email.$error.required" class="text-danger">用户名必须输入！</div>
+                        <div ng-show="loginForm.email.$error.email" class="text-danger">用户名不是正确的邮箱格式！</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" name="password" class="form-control" placeholder="请输入密码" ng-model="$ctrl.user.password" required ng-minlength="6">
+                        <div ng-show="loginForm.password.$error.required" class="text-danger">密码必须输入！</div>
+                        <div ng-show="loginForm.password.$error.minlength" class="text-danger">密码最小长度为6！</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-success" ng-disabled="!loginForm.$valid">登录</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

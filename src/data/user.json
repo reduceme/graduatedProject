@@ -1,0 +1,9 @@
+{
+    "users": [{
+        "email": "medairui9937@gmail.com",
+        "password": "199528"
+    },{
+        "email": "admin@angularjs.org",
+        "password": "123456"
+    }]
+}
