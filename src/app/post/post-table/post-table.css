@@ -74,3 +74,13 @@
     background: #4cda60;
     box-shadow: 0 0 1px #4cda60;
 }
+
+.post-item-container{
+    margin-left: 50px;
+}
+
+.btn-default{
+    background: #F7F7F7;
+    border: solid 1px #345391;
+    width: 80px;
+}

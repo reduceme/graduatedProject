@@ -20,11 +20,12 @@ define([
 
             //动态折线图
             var myChart = echarts.init(document.getElementById('myChart'));
+            var searchLinechart = echarts.init(document.getElementById('search-linechart'));
             var option = {
                 title: {
-                    text: '实时空气质量指数',
-                    subtext: '纯属虚构'
+                    text: '实时空气质量指数'
                 },
+                color: ['#ff3d3d'],
                 tooltip: {
                     trigger: 'axis',
                     axisPointer: {
@@ -73,7 +74,14 @@ define([
                         name: 'AQI',
                         max: 100,
                         min: 0,
-                        boundaryGap: [0.2, 0.2]
+                        boundaryGap: [0.2, 0.2],
+                        splitLine: { //网格线
+                            show: true,
+                            lineStyle: {
+                                color: ['#b1b1b1'],
+                                type: 'dashed'
+                            }
+                        }
                     }
                 ],
                 series: [
@@ -106,6 +114,72 @@ define([
                 myChart.setOption(option);
             }, 2100);
 
+            //查询折线图
+            var searchOption = {
+                title: {
+                    text: '指定时间段空气质量指数'
+                },
+                color: ['#ff3d3d'],
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#283b56'
+                        }
+                    }
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        dataView: {readOnly: false},
+                        restore: {},
+                        saveAsImage: {}
+                    }
+                },
+                legend: {
+                    data:['空气质量指数']
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    splitLine: { //网格线
+                        show: false,
+                        lineStyle: {
+                            color: ['#b1b1b1'],
+                            type: 'dashed'
+                        }
+                    },
+                    data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                },
+                yAxis: {
+                    type: 'value',
+                    scale: true,
+                    name: 'AQI',
+                    max: 500,
+                    min: 0,
+                    splitLine: { //网格线
+                        show: true,
+                        lineStyle: {
+                            color: ['#b1b1b1'],
+                            type: 'dashed'
+                        }
+                    }
+                },
+                series: [{
+                    name: '空气质量指数',
+                    type: 'line',
+                    data: ['200', '300', '500', '300', '280', '290', '230'],
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top' //值显示
+                        }
+                    }
+                }]
+            };
+
+            searchLinechart.setOption(searchOption);
         }
     });
 });
