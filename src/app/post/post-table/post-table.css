@@ -84,3 +84,16 @@
     border: solid 1px #345391;
     width: 80px;
 }
+
+.btn-default:visited,.btn-default:hover,.visited{
+    background: #F7F7F7;
+    border: solid 1px #345391;
+}
+
+.btn-default:hover{
+    color: orange;
+}
+
+.visited{
+    color: 	#FF7F50;
+}

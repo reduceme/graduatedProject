@@ -9,6 +9,17 @@ define([
         template: PostTableTemplate,
         controller: function() {
             var ctrl = this;
+
+            //添加点击样式
+            var addClickClass = function(){
+                $("#searchBtn button").click(function () {
+                    var index = $(this).index() + 1;
+                    $(".btn").removeClass("visited");
+                    $(this).addClass("visited");
+                });
+            };
+            addClickClass();
+
             ctrl.switchState = true;
             //开关
             ctrl.currentState = {
@@ -16,6 +27,32 @@ define([
                     data = !data;
                     console.log(data);
                 }
+            };
+
+            ctrl.oneDay = 60 * 60 * 24 * 1000;
+
+            //本周
+            ctrl.getWeek = function () {
+                ctrl.endTime = new Date().getTime();
+                ctrl.startTime = new Date(ctrl.endTime - 6 * ctrl.oneDay).setHours(0, 0, 0, 0);
+                console.log(ctrl.startTime);
+                console.log(ctrl.endTime);
+            };
+
+            //30天
+            ctrl.getThirtieth = function () {
+                ctrl.endTime = new Date().getTime();
+                ctrl.startTime = new Date(ctrl.endTime - 29 * ctrl.oneDay).setHours(0, 0, 0, 0);
+                console.log(ctrl.startTime);
+                console.log(ctrl.endTime);
+            };
+
+            //本月
+            ctrl.getCurrentMonthFirst = function () {
+                ctrl.endTime = new Date().getTime();
+                ctrl.startTime = new Date().setDate(1);
+                console.log(ctrl.startTime);
+                console.log(ctrl.endTime);
             };
 
             //动态折线图

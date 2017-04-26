@@ -5,14 +5,6 @@
             <input type="checkbox" id="checkbox_c2" class="chk_3" ng-model="$ctrl.switchState" ng-click="$ctrl.currentState.changeState($ctrl.switchState)"/><label for="checkbox_c2"></label>
         </div>
 
-        <!--<div class="btn-group">
-            <button type="button" class="btn btn-default">当日</button>
-            <button type="button" class="btn btn-default">7日</button>
-            <button type="button" class="btn btn-default">30日</button>
-            <button type="button" class="btn btn-default">当月</button>
-        </div>-->
-
-
         <div class="col-sm-12" style="margin-top: 50px">
             <div class="post-item-container" style="float: left; width: 45%;height: 650px">
                 <div class="echarts-mng-container">
@@ -25,11 +17,10 @@
             </div>
 
             <div class="post-item-container" style="float: left; width: 45%;height: 650px;">
-                <div class="btn-group" style="margin-top: -100px">
-                    <button type="button" class="btn btn-default">当日</button>
-                    <button type="button" class="btn btn-default">7日</button>
-                    <button type="button" class="btn btn-default">30日</button>
-                    <button type="button" class="btn btn-default">当月</button>
+                <div class="btn-group" id="searchBtn" style="margin-top: -100px">
+                    <button type="button" class="btn btn-default" ng-click="$ctrl.getWeek()">7日</button>
+                    <button type="button" class="btn btn-default" ng-click="$ctrl.getThirtieth()">30日</button>
+                    <button type="button" class="btn btn-default" ng-click="$ctrl.getCurrentMonthFirst()">当月</button>
                 </div>
                 <div class="row" style="margin-top: -20px">
                     <div class="col-sm-12">
