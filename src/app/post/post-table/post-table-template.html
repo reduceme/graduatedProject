@@ -1,8 +1,23 @@
 <div class="post-table-container">
     <div class="row">
-        <div class="wrap" style="width: 45%;float: left">
-            <p style="float: left;display: block;margin-right: 20px">当前空气净化器状态</p>
-            <input type="checkbox" id="checkbox_c2" class="chk_3" ng-model="$ctrl.switchState" ng-click="$ctrl.currentState.changeState($ctrl.switchState)"/><label for="checkbox_c2"></label>
+        <div class="wrap" style="width: 100%;float: left;margin-left: 50px; line-height: 32px">
+            <p style="float: left;display: block;margin-right: 10px;">当前空气净化器状态</p>
+            <input type="checkbox" style="float: left;margin-right: 50px" id="checkbox_c2" class="chk_3" ng-model="$ctrl.switchState" ng-click="$ctrl.currentState.changeState($ctrl.switchState)"/><label for="checkbox_c2" style="float: left;margin-top: 6px;margin-right: 50px"></label>
+            <p style="width: 120px; float: left;margin-right: 50px">今日峰值：<span class="todayMax">{{$ctrl.todayPeak}}</span></p>
+
+            <p style="float: left;display: block;margin-right: 10px;">请选择查询时间：</p>
+            <div class="input-group" style="float:left;">
+                <input id="txtDtbegin" name="dtBegin" type="text" class="form-control" ng-model="startTime">
+            </div>
+
+            <div class="btn-group" id="searchBtn" style="float:left;margin-left: 120px">
+                <button class="btn btn-default" data-toggle="modal" data-target="#myModal">查询</button>
+                <button type="button" class="btn btn-default visited" ng-click="$ctrl.getWeek()">7日</button>
+                <button type="button" class="btn btn-default" ng-click="$ctrl.getThirtieth()">30日</button>
+                <button type="button" class="btn btn-default" ng-click="$ctrl.getCurrentMonthFirst()">当月</button>
+            </div>
+        </div>
+
         </div>
 
         <div class="col-sm-12" style="margin-top: 50px">
@@ -17,12 +32,12 @@
             </div>
 
             <div class="post-item-container" style="float: left; width: 45%;height: 650px;">
-                <div class="btn-group" id="searchBtn" style="margin-top: -100px">
-                    <button type="button" class="btn btn-default" ng-click="$ctrl.getWeek()">7日</button>
+                <!--<div class="btn-group" id="searchBtn" style="margin-top: -100px">
+                    <button type="button" class="btn btn-default visited" ng-click="$ctrl.getWeek()">7日</button>
                     <button type="button" class="btn btn-default" ng-click="$ctrl.getThirtieth()">30日</button>
                     <button type="button" class="btn btn-default" ng-click="$ctrl.getCurrentMonthFirst()">当月</button>
-                </div>
-                <div class="row" style="margin-top: -20px">
+                </div>-->
+                <div class="row">
                     <div class="col-sm-12">
                         <div id="search-linechart" style="width: 600px;height:400px;"></div>
                     </div>
@@ -31,3 +46,30 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">指定时间空气质量指数</h4>
+            </div>
+            <div class="modal-body">该时间的空气质量指数为：{{$ctrl.todayPeak}}</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<script>
+    $('#txtDtbegin').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language: 'zh-CN',
+        pickDate: true,
+        pickTime: true,
+        inputMask: true,
+        pickerPosition: "bottom-left",
+        autoclose: true
+    });
+</script>

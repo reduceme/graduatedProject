@@ -4,14 +4,15 @@ define([
     'workspace/workspace.module',
     'text!post/post-table/post-table-template.html',
     'css!post/post-table/post-table.css'
-], function(workspaceModule, PostTableTemplate) {
+], function (workspaceModule, PostTableTemplate) {
     workspaceModule.component('postTable', {
         template: PostTableTemplate,
-        controller: function() {
+        controller: function () {
             var ctrl = this;
+            ctrl.todayPeak = 200;
 
             //添加点击样式
-            var addClickClass = function(){
+            var addClickClass = function () {
                 $("#searchBtn button").click(function () {
                     var index = $(this).index() + 1;
                     $(".btn").removeClass("visited");
@@ -35,24 +36,18 @@ define([
             ctrl.getWeek = function () {
                 ctrl.endTime = new Date().getTime();
                 ctrl.startTime = new Date(ctrl.endTime - 6 * ctrl.oneDay).setHours(0, 0, 0, 0);
-                console.log(ctrl.startTime);
-                console.log(ctrl.endTime);
             };
 
             //30天
             ctrl.getThirtieth = function () {
                 ctrl.endTime = new Date().getTime();
                 ctrl.startTime = new Date(ctrl.endTime - 29 * ctrl.oneDay).setHours(0, 0, 0, 0);
-                console.log(ctrl.startTime);
-                console.log(ctrl.endTime);
             };
 
             //本月
             ctrl.getCurrentMonthFirst = function () {
                 ctrl.endTime = new Date().getTime();
                 ctrl.startTime = new Date().setDate(1);
-                console.log(ctrl.startTime);
-                console.log(ctrl.endTime);
             };
 
             //动态折线图
@@ -73,7 +68,7 @@ define([
                     }
                 },
                 legend: {
-                    data:['空气质量指数']
+                    data: ['空气质量指数']
                 },
                 toolbox: {
                     show: true,
@@ -92,12 +87,12 @@ define([
                     {
                         type: 'category',
                         boundaryGap: true,
-                        data: (function (){
+                        data: (function () {
                             var now = new Date();
                             var res = [];
                             var len = 10;
                             while (len--) {
-                                res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                                res.unshift(now.toLocaleTimeString().replace(/^\D*/, ''));
                                 now = new Date(now - 2000);
                             }
                             return res;
@@ -123,13 +118,13 @@ define([
                 ],
                 series: [
                     {
-                        name:'空气质量指数',
-                        type:'line',
-                        data:(function (){
+                        name: '空气质量指数',
+                        type: 'line',
+                        data: (function () {
                             var res = [];
                             var len = 0;
                             while (len < 10) {
-                                res.push((Math.random()*10 + 5).toFixed(1) - 0);
+                                res.push((Math.random() * 10 + 5).toFixed(1) - 0);
                                 len++;
                             }
                             return res;
@@ -138,12 +133,12 @@ define([
                 ]
             };
 
-            setInterval(function (){
-                var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+            setInterval(function () {
+                var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
 
                 var data = option.series[0].data;
                 data.shift();
-                data.push((Math.random()*10 + 5).toFixed(1) - 0);
+                data.push((Math.random() * 10 + 5).toFixed(1) - 0);
 
                 option.xAxis[0].data.shift();
                 option.xAxis[0].data.push(axisData);
@@ -154,7 +149,7 @@ define([
             //查询折线图
             var searchOption = {
                 title: {
-                    text: '指定时间段空气质量指数'
+                    text: '指定时间段平均空气质量指数'
                 },
                 color: ['#ff3d3d'],
                 tooltip: {
@@ -175,7 +170,7 @@ define([
                     }
                 },
                 legend: {
-                    data:['空气质量指数']
+                    data: ['空气质量指数']
                 },
                 xAxis: {
                     type: 'category',
