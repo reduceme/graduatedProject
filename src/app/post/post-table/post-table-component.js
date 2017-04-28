@@ -9,14 +9,19 @@ define([
         template: PostTableTemplate,
         controller: function () {
             var ctrl = this;
+            ctrl.isSearch = false;
             ctrl.todayPeak = 200;
 
             //添加点击样式
             var addClickClass = function () {
                 $("#searchBtn button").click(function () {
                     var index = $(this).index() + 1;
-                    $(".btn").removeClass("visited");
-                    $(this).addClass("visited");
+                    if(index === 1){
+                        return ;
+                    }else {
+                        $(".btn").removeClass("visited");
+                        $(this).addClass("visited");
+                    }
                 });
             };
             addClickClass();
@@ -27,6 +32,16 @@ define([
                 changeState: function (data) {
                     data = !data;
                     console.log(data);
+                }
+            };
+
+            ctrl.searchTimeFunc = function (data) {
+                if(data) {
+                    data = new Date(data).getTime();
+                    ctrl.isSearch = true;
+                    console.log(data);
+                }else {
+                    alert("请选择查询时间！");
                 }
             };
 
