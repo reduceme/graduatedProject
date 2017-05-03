@@ -9,6 +9,7 @@ define([
         template: PostTableTemplate,
         controller: function () {
             var ctrl = this;
+
             ctrl.isSearch = false;
             ctrl.todayPeak = 200;
 
@@ -38,8 +39,32 @@ define([
             ctrl.searchTimeFunc = function (data) {
                 if(data) {
                     data = new Date(data).getTime();
-                    ctrl.isSearch = true;
+                    data = data.toString();
                     console.log(data);
+                    ctrl.isSearch = true;
+                   /* ctrl.http({
+                        url: "localhost:3000/search",
+                        type: 'post',
+                        data: data,
+                        success: function (data) {
+                            alert("success!");
+                        },
+                        error: function (data) {
+                            alert(data);
+                        }
+                    });
+                    console.log(data);*/
+                   $.ajax({
+                       url: "http://localhost:3000/search",
+                       type: 'post',
+                       data: data,
+                       success: function (data) {
+                           alert("success!");
+                       },
+                       error: function (data) {
+                           alert("error");
+                       }
+                   })
                 }else {
                     alert("请选择查询时间！");
                 }
