@@ -17,9 +17,9 @@ define([
             var addClickClass = function () {
                 $("#searchBtn button").click(function () {
                     var index = $(this).index() + 1;
-                    if(index === 1){
-                        return ;
-                    }else {
+                    if (index === 1) {
+                        return;
+                    } else {
                         $(".btn").removeClass("visited");
                         $(this).addClass("visited");
                     }
@@ -36,36 +36,29 @@ define([
                 }
             };
 
-            ctrl.searchTimeFunc = function (data) {
-                if(data) {
-                    data = new Date(data).getTime();
-                    data = data.toString();
-                    console.log(data);
+            ctrl.searchTimeFunc = function (searchTime) {
+                if (searchTime) {
+                    searchTime = new Date(searchTime).getTime();
+                    searchTime = searchTime.toString();
+                    console.log(searchTime);
                     ctrl.isSearch = true;
-                   /* ctrl.http({
-                        url: "localhost:3000/search",
-                        type: 'post',
-                        data: data,
-                        success: function (data) {
-                            alert("success!");
+                    var option={
+                        type:"POST",
+                        url:"http://localhost:3000/search",
+                        dataType:"text",
+                        data:{
+                            time: searchTime
                         },
-                        error: function (data) {
-                            alert(data);
+                        success:function(response){
+                            response = response.toString();
+                            console.log(response);
+                        },
+                        error:function(err){
+                            alert("error!");
                         }
-                    });
-                    console.log(data);*/
-                   $.ajax({
-                       url: "http://localhost:3000/search",
-                       type: 'post',
-                       data: data,
-                       success: function (data) {
-                           alert("success!");
-                       },
-                       error: function (data) {
-                           alert("error");
-                       }
-                   })
-                }else {
+                    };
+                    $.ajax(option);
+                } else {
                     alert("请选择查询时间！");
                 }
             };
