@@ -12,6 +12,7 @@ define([
 
             ctrl.isSearch = false;
             ctrl.todayPeak = 200;
+            ctrl.urlHeader = "http://localhost:3000";
 
             //添加点击样式
             var addClickClass = function () {
@@ -27,13 +28,42 @@ define([
             };
             addClickClass();
 
+            //获取当前空气净化器开关状态
             ctrl.switchState = true;
-            //开关
-            ctrl.currentState = {
-                changeState: function (data) {
-                    data = !data;
-                    console.log(data);
-                }
+            var getCurrSwichSta = function () {
+                var option = {
+                    type: "get",
+                    url: ctrl.urlHeader + "/get_air",
+                    success: function (data) {
+                        console.log(data[0].controller.controller);
+                        ctrl.switchState = data[0].controller.controller;
+                    },
+                    error: function (err) {
+                        alert("获取空气净化器当前开关状态失败！")
+                    }
+                };
+                $.ajax(option);
+            };
+
+            getCurrSwichSta();
+
+            //开关空气净化器
+            ctrl.changeAirStatus = function (data){
+                data = !data;
+                var option = {
+                    type: "post",
+                    url: ctrl.urlHeader + "/change_air_status",
+                    data: {
+                        controller: data
+                    },
+                    success: function (data) {
+                        alert("success");
+                    },
+                    error: function (data) {
+                        alert("error");
+                    }
+                };
+                $.ajax(option);
             };
 
             ctrl.searchTimeFunc = function (searchTime) {
@@ -42,18 +72,19 @@ define([
                     searchTime = searchTime.toString();
                     console.log(searchTime);
                     ctrl.isSearch = true;
-                    var option={
-                        type:"POST",
-                        url:"http://localhost:3000/search",
-                        dataType:"text",
-                        data:{
-                            time: searchTime
+                    var option = {
+                        type: "POST",
+                        url: ctrl.urlHeader + "/search",
+                        dataType: "text",
+                        //测试数据
+                        data: {
+                            time: "1493950256000"
                         },
-                        success:function(response){
+                        success: function (response) {
                             response = response.toString();
                             console.log(response);
                         },
-                        error:function(err){
+                        error: function (err) {
                             alert("error!");
                         }
                     };

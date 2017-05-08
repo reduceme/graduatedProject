@@ -2,7 +2,7 @@
     <div class="row">
         <div class="wrap" style="width: 100%;float: left;margin-left: 50px; line-height: 32px">
             <p style="float: left;display: block;margin-right: 10px;">当前空气净化器状态</p>
-            <input type="checkbox" style="float: left;margin-right: 50px" id="checkbox_c2" class="chk_3" ng-model="$ctrl.switchState" ng-click="$ctrl.currentState.changeState($ctrl.switchState)"/><label for="checkbox_c2" style="float: left;margin-top: 6px;margin-right: 50px"></label>
+            <input type="checkbox" style="float: left;margin-right: 50px" id="checkbox_c2" class="chk_3" ng-model="$ctrl.switchState" ng-click="$ctrl.changeAirStatus($ctrl.switchState)"/><label for="checkbox_c2" style="float: left;margin-top: 6px;margin-right: 50px"></label>
             <p style="width: 120px; float: left;margin-right: 50px">今日峰值：<span class="todayMax">{{$ctrl.todayPeak}}</span></p>
 
             <p style="float: left;display: block;margin-right: 10px;">请选择查询时间：</p>
