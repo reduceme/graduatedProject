@@ -15,7 +15,7 @@ define([
             ctrl.urlHeader = "http://localhost:3000";
 
             //添加点击样式
-            var addClickClass = function () {
+            /*var addClickClass = function () {
                 $("#searchBtn button").click(function () {
                     var index = $(this).index() + 1;
                     if (index === 1) {
@@ -26,7 +26,7 @@ define([
                     }
                 });
             };
-            addClickClass();
+            addClickClass();*/
 
             //获取当前空气净化器开关状态
             ctrl.switchState = true;
@@ -69,7 +69,6 @@ define([
             ctrl.searchTimeFunc = function (searchTime) {
                 if (searchTime) {
                     searchTime = new Date(searchTime).getTime();
-                    searchTime = searchTime.toString();
                     console.log(searchTime);
                     ctrl.isSearch = true;
                     var option = {
@@ -78,7 +77,7 @@ define([
                         dataType: "text",
                         //测试数据
                         data: {
-                            time: "1493950256000"
+                            "time": searchTime
                         },
                         success: function (response) {
                             response = response.toString();
@@ -97,7 +96,7 @@ define([
             ctrl.oneDay = 60 * 60 * 24 * 1000;
 
             //本周
-            ctrl.getWeek = function () {
+            /*ctrl.getWeek = function () {
                 ctrl.endTime = new Date().getTime();
                 ctrl.startTime = new Date(ctrl.endTime - 6 * ctrl.oneDay).setHours(0, 0, 0, 0);
             };
@@ -112,11 +111,11 @@ define([
             ctrl.getCurrentMonthFirst = function () {
                 ctrl.endTime = new Date().getTime();
                 ctrl.startTime = new Date().setDate(1);
-            };
+            };*/
 
             //动态折线图
             var myChart = echarts.init(document.getElementById('myChart'));
-            var searchLinechart = echarts.init(document.getElementById('search-linechart'));
+            // var searchLinechart = echarts.init(document.getElementById('search-linechart'));
             var option = {
                 title: {
                     text: '实时空气质量指数'
@@ -211,7 +210,7 @@ define([
             }, 2100);
 
             //查询折线图
-            var searchOption = {
+            /*var searchOption = {
                 title: {
                     text: '指定时间段平均空气质量指数'
                 },
@@ -275,7 +274,7 @@ define([
                 }]
             };
 
-            searchLinechart.setOption(searchOption);
+            searchLinechart.setOption(searchOption);*/
         }
     });
 });
