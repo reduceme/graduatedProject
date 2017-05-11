@@ -14,35 +14,39 @@
             </div>
 
             <div class="btn-group" id="searchBtn" style="float:left;margin-left: 120px">
-                <button type="button" class="btn btn-default" ng-click="$ctrl.searchTimeFunc($ctrl.searchTime)">查询</button>
-                <!--<button type="button" class="btn btn-default visited" ng-click="$ctrl.getWeek()">7日</button>-->
-                <!--<button type="button" class="btn btn-default" ng-click="$ctrl.getThirtieth()">30日</button>-->
-                <!--<button type="button" class="btn btn-default" ng-click="$ctrl.getCurrentMonthFirst()">当月</button>-->
+                <button type="button" class="btn btn-default" ng-click="$ctrl.showMess($ctrl.searchTime)">查询</button>
+                <button type="button" class="btn btn-default visited" ng-click="$ctrl.getHour()" style="width: 88px">1小时走势</button>
+                <button type="button" class="btn btn-default" ng-click="$ctrl.getToday()" style="width: 100px">24小时走势</button>
+                <button type="button" class="btn btn-default" ng-click="$ctrl.getWeek()">1周走势</button>
+                <!--<button type="button" class="btn btn-default">1周走势</button>-->
             </div>
 
-            <p style="width: 300px; float: left;margin-left: 50px" ng-show="$ctrl.isSearch">
-                {{$ctrl.searchTime}}时刻空气质量指数：<span class="todayMax">{{$ctrl.todayPeak}}</span></p>
+            <p style="width: 500px; float: left;margin-left: 50px" ng-show="$ctrl.isSearch">
+                {{$ctrl.searchTime}}空气PM2.5浓度：
+                <span class="todayMax">{{$ctrl.PM25}}mg/m3&nbsp;&nbsp;</span>
+                PM10浓度：<span class="todayMax">{{$ctrl.PM10}}mg/m3</span>
+            </p>
         </div>
     </div>
 
     <div class="col-sm-12" style="margin-top: 50px">
-        <div class="post-item-container" style="float: left; width: 80%;height: 650px">
+        <div class="post-item-container" style="float: left; width: 45%;height: 650px">
             <div class="echarts-mng-container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div id="myChart" style="width: 100%;height:650px;"></div>
+                        <div id="myChart" style="width: 100%;height:400px;"></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!--<div class="post-item-container" style="float: left; width: 45%;height: 650px;">
+        <div class="post-item-container" style="float: left; width: 45%;height: 650px;">
             <div class="row">
                 <div class="col-sm-12">
-                    <div id="search-linechart" style="width: 600px;height:400px;"></div>
+                    <div id="search-linechart" style="width: 100%;height:400px;"></div>
                 </div>
             </div>
-        </div>-->
+        </div>
     </div>
 </div>
 </div>
