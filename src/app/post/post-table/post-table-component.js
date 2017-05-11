@@ -125,7 +125,7 @@ define([
 
 
             //获取指定时间段数据
-            var getSpecialData = function (arr) {
+            var getSpecialData = function (arr, dataOne, dataTwo) {
                 for(var i = 0, len = arr.length; i < len; i++) {
                     var searchTime = arr[i];
                     var postData = {
@@ -139,8 +139,9 @@ define([
                         data: postData,
                         success: function (response) {
                             response = JSON.parse(response);
-                            searchOption.series[0].data.push(response[0].PM2_5.toString());
-                            searchOption.series[1].data.push(response[0].PM10.toString());
+                            // console.log(response);
+                            dataOne.push(response[0].PM2_5.toString());
+                            dataTwo.push(response[0].PM10.toString());
                             //应该用闭包来实现，但是怎么实现呢？？？
                             if(i === len){
                                 searchLinechart.setOption(searchOption);
@@ -150,7 +151,7 @@ define([
                             alert("error!");
                         }
                     });
-                    searchOption.xAxis.data.push(timeConvert(arr[i]));
+                    // searchOption.xAxis.data.push(timeConvert(arr[i]));
                 }
             };
 
@@ -167,7 +168,12 @@ define([
                 searchOption.series[0].data = [];
                 searchOption.series[1].data = [];
                 searchOption.xAxis.data = [];
-                getSpecialData(timeArr);
+                getSpecialData(timeArr,searchOption.series[0].data, searchOption.series[1].data);
+                for(var i = 0, len = timeArr.length; i < len; i++){
+                    searchOption.xAxis.data.push(timeConvert(timeArr[i]));
+                }
+
+                // searchOption.xAxis.data.push(timeConvert(timeArr[i]));
             };
 
             //过去一天
@@ -175,14 +181,18 @@ define([
                 var timeArr = [];
                 timeArr[0] = new Date().getTime();
                 for(var i = 1; i < 24; i++){
-                    timeArr[i] = timeArr[0] - i * oneDay;
+                    timeArr[i] = timeArr[0] - i * halfHour;
                 }
                 console.log(timeArr);
 
                 searchOption.series[0].data = [];
                 searchOption.series[1].data = [];
                 searchOption.xAxis.data = [];
-                getSpecialData(timeArr);
+                getSpecialData(timeArr,searchOption.series[0].data, searchOption.series[1].data);
+                // searchOption.xAxis.data.push(timeConvert(timeArr[i]));
+                for(var i = 0, len = timeArr.length; i < len; i++){
+                    searchOption.xAxis.data.push(timeConvert(timeArr[i]));
+                }
             };
 
             //过去一周
@@ -198,7 +208,11 @@ define([
                 searchOption.series[0].data = [];
                 searchOption.series[1].data = [];
                 searchOption.xAxis.data = [];
-                getSpecialData(timeArr);
+                getSpecialData(timeArr,searchOption.series[0].data, searchOption.series[1].data);
+                // searchOption.xAxis.data.push(timeConvert(timeArr[i]));
+                for(var i = 0, len = timeArr.length; i < len; i++){
+                    searchOption.xAxis.data.push(timeConvert(timeArr[i]));
+                }
             };
 
             //动态折线图
@@ -241,7 +255,7 @@ define([
                         data: (function () {
                             var now = new Date();
                             var res = [];
-                            var len = 10;
+                            var len = 9;
                             while (len--) {
                                 res.unshift(now.toLocaleTimeString().replace(/^\D*/, ''));
                                 now = new Date(now - 2000);
@@ -300,6 +314,7 @@ define([
             };
 
             setInterval(function () {
+                var nowTime = new Date().getTime();
                 var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
 
                 var data = option.series[0].data;
@@ -308,14 +323,15 @@ define([
                 data.shift();
                 dataTwo.shift();
 
-                data.push((Math.random() * 10 + 5).toFixed(1) - 0);
-                dataTwo.push((Math.random() * 10 + 10).toFixed(1) - 0);
+                getSpecialData([nowTime], option.series[0].data, option.series[1].data);
+                // data.push((Math.random() * 10 + 5).toFixed(1) - 0);
+                // dataTwo.push((Math.random() * 10 + 10).toFixed(1) - 0);
 
                 option.xAxis[0].data.shift();
                 option.xAxis[0].data.push(axisData);
 
                 myChart.setOption(option);
-            }, 2100);
+            }, 6000);
 
             //查询折线图
             var searchOption = {
@@ -353,7 +369,17 @@ define([
                             type: 'dashed'
                         }
                     },
-                    data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                    // data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                    data:  (function () {
+                        var now = new Date();
+                        var res = [];
+                        var len = 9;
+                        while (len--) {
+                            res.unshift(now.toLocaleTimeString().replace(/^\D*/, ''));
+                            now = new Date(now - 2000);
+                        }
+                        return res;
+                    })()
                 },
                 yAxis: {
                     type: 'value',
@@ -374,7 +400,16 @@ define([
                         color: ['#CD9B1D'],
                         name: 'PM2.5浓度',
                         type: 'line',
-                        data: ['10', '15', '30', '5', '70', '15', '66'],
+                        // data: ['10', '15', '30', '5', '70', '15', '66'],
+                        data: (function () {
+                            var res = [];
+                            var len = 0;
+                            while (len < 9) {
+                                res.push((Math.random() * 10 + 5).toFixed(1) - 0);
+                                len++;
+                            }
+                            return res;
+                        })(),
                         label: {
                             normal: {
                                 show: true,
@@ -385,7 +420,15 @@ define([
                         color: ['#ff3d3d'],
                         name: 'PM10浓度',
                         type: 'line',
-                        data: ['20', '35', '15', '80', '77', '2', '87'],
+                        data: (function () {
+                            var res = [];
+                            var len = 0;
+                            while (len < 9) {
+                                res.push((Math.random() * 10 + 5).toFixed(1) - 0);
+                                len++;
+                            }
+                            return res;
+                        })(),
                         label: {
                             normal: {
                                 show: true,
@@ -395,7 +438,7 @@ define([
                     }]
             };
 
-            searchLinechart.setOption(searchOption);
+            ctrl.getHour();
         }
     });
 });
