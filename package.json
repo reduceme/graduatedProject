@@ -1,9 +1,9 @@
 {
-    "name": "NiceFish-Admin-ng1",
-    "author": "大漠穷秋",
+    "name": "实时空气质量监测系统",
+    "author": "regdai",
     "license": "MIT",
     "version": "1.0.0",
-    "description": "AngularJS1.6.4模板项目",
+    "description": "毕业设计",
     "main": "index.js",
     "appPath": "src/app",
     "dependencies": {},

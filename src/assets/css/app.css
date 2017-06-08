@@ -3324,11 +3324,6 @@ ul.project_files li a i {
   transform: rotate(-90deg);
 }
 
-/* *********  /verticle tabs  **************************** */
-
-
-/* *********  moris  **************************** */
-
 .morris-hover {
   position: absolute;
   z-index: 1000;
@@ -3350,11 +3345,6 @@ ul.project_files li a i {
   white-space: nowrap;
   margin: 0.1em 0;
 }
-
-/* *********  /moris  **************************** */
-
-
-/* *********  ecommerce  **************************** */
 
 .price {
   font-size: 40px;
@@ -3415,8 +3405,6 @@ ul.project_files li a i {
 .product_social ul li a i {
   font-size: 35px;
 }
-
-/* *********  /ecommerce  **************************** */
 
 /** login **/
 .login {

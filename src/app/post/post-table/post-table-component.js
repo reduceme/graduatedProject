@@ -39,7 +39,7 @@ define([
             };*/
 
             //获取当前空气净化器开关状态
-            ctrl.switchState = true;
+            ctrl.switchState = false;
             var getCurrSwichSta = function () {
                 var option = {
                     type: "get",
